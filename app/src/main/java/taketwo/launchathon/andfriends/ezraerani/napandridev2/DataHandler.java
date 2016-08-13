@@ -10,6 +10,8 @@ public class DataHandler {
     private final String TAG = DataHandler.class.getName();
     private static DataHandler instance = new DataHandler();
     private Context context;
+    private Route selectedRoute = null;
+    private BusStop alertStop = null;
 
     private DataHandler() {
     }
@@ -26,5 +28,22 @@ public class DataHandler {
         // TODO: 8/13/16 feed RawRoute data to api call
     }
 
+    public void selectAlertStop(int position) {
 
+        if (selectedRoute != null) {
+            alertStop = selectedRoute.getLine().getAvailableStops().get(position);
+        }
+
+        // TODO: 8/13/16 trigger service with realtime location update against alert stop
+
+    }
+
+    public void clearAll() {
+        selectedRoute = null;
+        alertStop = null;
+    }
+
+    public BusStop getAlertStop() {
+        return alertStop;
+    }
 }
