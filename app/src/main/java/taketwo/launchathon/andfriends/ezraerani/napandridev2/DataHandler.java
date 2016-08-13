@@ -1,6 +1,7 @@
 package taketwo.launchathon.andfriends.ezraerani.napandridev2;
 
 import android.content.Context;
+import android.util.Log;
 
 /**
  * Created by ezraerani on 8/12/16.
@@ -11,7 +12,7 @@ public class DataHandler {
     private static DataHandler instance = new DataHandler();
     private Context context;
     private Route selectedRoute = null;
-    private BusStop alertStop = null;
+    private BusStop selectedAlertStop = null;
 
     private DataHandler() {
     }
@@ -21,29 +22,38 @@ public class DataHandler {
     }
 
     public void init(Context context) {
+        Log.d(TAG, "init");
+
         this.context = context.getApplicationContext();
     }
 
-    public void getRoute(RawRoute route) {
+    public void makeRouteCall(RawRoute route) {
+        Log.d(TAG, "getRoute");
         // TODO: 8/13/16 feed RawRoute data to api call
     }
 
     public void selectAlertStop(int position) {
+        Log.d(TAG, "selectAlertStop");
 
         if (selectedRoute != null) {
-            alertStop = selectedRoute.getLine().getAvailableStops().get(position);
+            Log.d(TAG, "selectedRoute != null");
+            selectedAlertStop = selectedRoute.getLine().getAvailableStops().get(position);
         }
 
-        // TODO: 8/13/16 trigger service with realtime location update against alert stop
+        // TODO: 8/13/16 trigger service with realtime location update against selectedAlertStop
 
     }
 
     public void clearAll() {
+        Log.d(TAG, "clearAll");
+
         selectedRoute = null;
-        alertStop = null;
+        selectedAlertStop = null;
     }
 
-    public BusStop getAlertStop() {
-        return alertStop;
+    public BusStop getSelectedAlertStop() {
+        Log.d(TAG, "getSelectedAlertStop");
+
+        return selectedAlertStop;
     }
 }
