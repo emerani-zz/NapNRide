@@ -9,13 +9,14 @@ import android.util.Log;
 public class DataHandler {
 
     private final String TAG = DataHandler.class.getName();
+    private final String apiKey = "AIzaSyBjOOCh-o5Xl2Rh3CMLV0si9NGGoDvW-A8";
+
     private static DataHandler instance = new DataHandler();
     private Context context;
     private Route selectedRoute = null;
     private BusStop selectedAlertStop = null;
 
-    private DataHandler() {
-    }
+    private DataHandler() {}
 
     public static DataHandler getInstance() {
         return instance;
@@ -44,7 +45,7 @@ public class DataHandler {
 
     }
 
-    public void clearAll() {
+    public void clearAllSelections() {
         Log.d(TAG, "clearAll");
 
         selectedRoute = null;
