@@ -64,17 +64,21 @@ public class DataHandler {
 
 
     private void callApiForRoute() {
+        Log.d(TAG, "callApiForRoute");
+
 
         apiClient.getData(getUserLocation(), getUserDestination(), MODE, TRANSIT_MODE, apiKey)
                 .enqueue(new Callback<RouteResponse>() {
             @Override
             public void onResponse(Call<RouteResponse> call, Response<RouteResponse> response) {
                 handleResponse(response.body());
+                Log.d("callApiForRoute", "onResponse");
+
             }
 
             @Override
             public void onFailure(Call<RouteResponse> call, Throwable t) {
-                Log.d("onFailure", t.getMessage());
+                Log.e("onFailure", t.getMessage());
             }
         });
 
@@ -101,5 +105,7 @@ public class DataHandler {
     public void setLocation(Location location) {
         Log.d(TAG, "setLocation");
         this.location = location;
+
+        callApiForRoute();
     }
 }

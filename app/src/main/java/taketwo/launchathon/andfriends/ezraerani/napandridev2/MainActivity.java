@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements DataHandler.OnRou
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate");
         setContentView(R.layout.activity_main);
         dataHandler = DataHandler.getInstance();
         dataHandler.initActivity(this);
@@ -41,18 +42,25 @@ public class MainActivity extends AppCompatActivity implements DataHandler.OnRou
         isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // Prompts user for permission to access their location (EC)
+            Log.d("findOriginLocation", "If1");
+
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
                     LOCATION_PERMISSION_REQUEST);
         }
         if (isGPSEnabled && locationManager != null) {
+            Log.d("findOriginLocation", "If2");
+
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, (LocationListener) this);
             location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            Log.d("location", location.getProvider());
+            dataHandler.setLocation(location);
         } else if (isNetworkEnabled && locationManager != null) {
-            Log.d(TAG, "findOrigin ElseIf");
+            Log.d("findOriginLocation", "ElseIf");
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2000, 10, (LocationListener) this);
             location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            dataHandler.setLocation(locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER));
+            Log.d("location", location.getProvider());
+            dataHandler.setLocation(location);
         }
     }
 
