@@ -10,8 +10,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
-public class MainActivity extends AppCompatActivity implements DataHandler.OnRouteReceivedListener {
+public class MainActivity extends AppCompatActivity implements DataHandler.OnRouteReceivedListener, LocationListener {
 
     private final String TAG = MainActivity.class.getName();
 
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements DataHandler.OnRou
     }
 
     private void findOriginLocation() {
+        Log.d(TAG, "findOriginLocation");
         // Prompts user for permission & gets current location (EC)
         isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
         isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -47,8 +49,10 @@ public class MainActivity extends AppCompatActivity implements DataHandler.OnRou
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, (LocationListener) this);
             location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         } else if (isNetworkEnabled && locationManager != null) {
+            Log.d(TAG, "findOrigin ElseIf");
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2000, 10, (LocationListener) this);
             location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            dataHandler.setLocation(locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER));
         }
     }
 
@@ -66,6 +70,27 @@ public class MainActivity extends AppCompatActivity implements DataHandler.OnRou
 
     @Override
     public void routeReceivedSoDoSomething() {
+        Log.d(TAG, "routeReceivedSoDoSomething");
+        //update UI
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
 
     }
 }

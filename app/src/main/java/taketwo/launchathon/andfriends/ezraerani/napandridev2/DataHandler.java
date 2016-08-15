@@ -51,39 +51,25 @@ public class DataHandler {
     }
 
     public void initActivity(Activity activity) {
+        Log.d(TAG, "initActivity");
         listener = (OnRouteReceivedListener) activity;
-    }
-
-
-    public void selectAlertStop(int position) {
-        Log.d(TAG, "selectAlertStop");
-
-//        if (selectedRoute != null) {
-//            Log.d(TAG, "selectedRoute != null");
-//            selectedAlertStop = selectedRoute.getLine().getAvailableStops().get(position);
-//        }
-
-        // TODO: 8/13/16 trigger service with realtime location update against selectedAlertStop
-
     }
 
     private void handleResponse(RouteResponse response) {
         Route theRoute = response.getRoutes().get(0);
         selectedRoute = theRoute;
         listener.routeReceivedSoDoSomething();
+        // TODO: 8/15/16 start service
     }
 
 
     private void callApiForRoute() {
-
-
 
         apiClient.getData(getUserLocation(), getUserDestination(), MODE, TRANSIT_MODE, apiKey)
                 .enqueue(new Callback<RouteResponse>() {
             @Override
             public void onResponse(Call<RouteResponse> call, Response<RouteResponse> response) {
                 handleResponse(response.body());
-
             }
 
             @Override
@@ -113,6 +99,7 @@ public class DataHandler {
     }
 
     public void setLocation(Location location) {
+        Log.d(TAG, "setLocation");
         this.location = location;
     }
 }
