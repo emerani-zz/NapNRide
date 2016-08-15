@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 apiKey
         );
         restClient = new RESTClient().getApiClient();
-        retrofit2.Call call = restClient.putData(routeResponse, routeResponse.toString());
+        retrofit2.Call call = restClient.getData(routeResponse, routeResponse.toString());
         call.enqueue(new Callback<RouteResponse>() {
             @Override
             public void onResponse(Call<RouteResponse> call, Response<RouteResponse> response) {

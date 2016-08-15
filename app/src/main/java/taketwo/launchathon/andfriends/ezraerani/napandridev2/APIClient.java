@@ -1,7 +1,7 @@
 package taketwo.launchathon.andfriends.ezraerani.napandridev2;
 
 import retrofit2.http.Body;
-import retrofit2.http.PUT;
+import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 /**
@@ -14,8 +14,8 @@ public interface APIClient {
 //    @GET("{apiData}")
 //    retrofit2.Call getData(@Path("apiData") String apiData);
 
-    @PUT("{apiData}")
-    retrofit2.Call putData(@Body RouteResponse routeResponse,
+    @GET("{apiData}")
+    retrofit2.Call getData(@Body RouteResponse routeResponse,
                                 @Path("apiData") String apiData);
 
 //    @PATCH("{apiData}")
