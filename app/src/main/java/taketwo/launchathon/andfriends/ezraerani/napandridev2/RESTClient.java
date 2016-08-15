@@ -16,7 +16,7 @@ public class RESTClient {
     RESTClient() {
         Gson gson = new GsonBuilder().create();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://maps.googleapis.com/maps/api/directions/")
+                .baseUrl("http://maps.googleapis.com/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
