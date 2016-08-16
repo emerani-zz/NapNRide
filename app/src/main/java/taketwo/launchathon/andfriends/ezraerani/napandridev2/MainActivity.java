@@ -14,7 +14,7 @@ import android.util.Log;
 
 public class MainActivity extends AppCompatActivity implements DataHandler.OnRouteReceivedListener, LocationListener {
 
-    private final String TAG = MainActivity.class.getName();
+    private final String TAG = MainActivity.class.getSimpleName();
 
     private static final int LOCATION_PERMISSION_REQUEST = 1;
 
