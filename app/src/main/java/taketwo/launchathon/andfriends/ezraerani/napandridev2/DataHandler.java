@@ -31,7 +31,7 @@ public class DataHandler {
     String SAMPLE_DESTINATION = "184 5th Ave New York NY";
 
     private APIClient apiClient;
-    private Location location;
+    private Location origin;
     private String destination;
     private OnRouteReceivedListener listener;
 
@@ -101,9 +101,9 @@ public class DataHandler {
 
         // Returns latitude & longitude in a string format ready for URL injection (EC)
         String loc =
-                location.getLatitude()
+                origin.getLatitude()
                         + ","
-                        + location.getLongitude();
+                        + origin.getLongitude();
         return loc;
     }
 
@@ -120,9 +120,9 @@ public class DataHandler {
         this.destination = destination;
     }
 
-    public void setLocation(Location location) {
-        Log.d(TAG, "setLocation");
-        this.location = location;
+    public void setOrigin(Location origin) {
+        Log.d(TAG, "setOrigin");
+        this.origin = origin;
 
         callApiForRoute();
     }

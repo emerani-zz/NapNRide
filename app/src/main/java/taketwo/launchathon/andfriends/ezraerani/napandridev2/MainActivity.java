@@ -54,13 +54,13 @@ public class MainActivity extends AppCompatActivity implements DataHandler.OnRou
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, (LocationListener) this);
             location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             Log.d("location", location.getProvider());
-            dataHandler.setLocation(location);
+            dataHandler.setOrigin(location);
         } else if (isNetworkEnabled && locationManager != null) {
             Log.d("findOriginLocation", "ElseIf");
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2000, 10, (LocationListener) this);
             location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             Log.d("location", location.getProvider());
-            dataHandler.setLocation(location);
+            dataHandler.setOrigin(location);
         }
     }
 
